@@ -1,9 +1,14 @@
 import pytest
 from selenium import webdriver
-from data import UsersTestData
+from selenium.webdriver.common.by import By
+from data.data import UsersTestData
 
+class Locators:
+    button_login_in_main = (By.XPATH, "//button[contains(text(),'Войти в аккаунт')]")
+    input_email_auth = (By.XPATH, "//input[@name='name']")
+    input_password_auth = (By.XPATH, "//input[@name='Пароль']")
+    button_login = (By.XPATH, "//button[contains(text(),'Войти')]")
 
-# Фикстура веб-драйвера
 @pytest.fixture(scope="function")
 def driver():
     chrome_options = webdriver.ChromeOptions()
@@ -14,11 +19,10 @@ def driver():
     yield driver
     driver.quit()
 
-
-# Фикстура для авторизации с валидной парой log/pass перед тестами
 @pytest.fixture
 def login(driver):
-    driver.find_element(*TestLocators.button_login_in_main).click()
-    driver.find_element(*TestLocators.input_email_auth).send_keys(UsersTestData.email)
-    driver.find_element(*TestLocators.input_password_auth).send_keys(UsersTestData.password)
-    driver.find_element(*TestLocators.button_login).click()
+    driver.find_element(*Locators.button_login_in_main).click()
+    driver.find_element(*Locators.input_email_auth).send_keys(UsersTestData.email)
+    driver.find_element(*Locators.input_password_auth).send_keys(UsersTestData.password)
+    driver.find_element(*Locators.button_login).click()
+
