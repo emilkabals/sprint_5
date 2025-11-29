@@ -2,7 +2,7 @@ import pytest
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 from locators.locators import Locators
-from helpers.base import create_random_email, create_random_password, create_email_base
+from helpers import create_random_email, create_random_password, create_email_base
 from data.data import UsersTestData
 
 

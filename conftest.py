@@ -15,7 +15,7 @@ def driver():
     chrome_options.add_argument('--window-size=1920,1080')
     chrome_options.add_argument("--incognito")
     driver = webdriver.Chrome(options=chrome_options)
-    driver.get("https://stellarburgers.nomoreparties.site/")
+    driver.get("https://stellarburgers.education-services.ru/")
     yield driver
     driver.quit()
 
