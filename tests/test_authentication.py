@@ -28,18 +28,19 @@ class TestAuthentication:
         assert driver.find_element(*make_order_button).is_displayed()
 
 class TestAuthentication:
-    # Вход через кнопку «Войти в аккаунт» на главной
-    def test_authentication_by_button_login_in_main_page_success(self, driver):
+    # Вход через кнопку в форме регистрации
+    def test_authentication_by_button_login_in_registration_form_success(self, driver):
         driver.find_element(*Locators.button_login_in_main).click()
-        WebDriverWait(driver, 6).until(expected_conditions.visibility_of_element_located(Locators.button_register))
+        driver.find_element(*Locators.button_register).click()
+        driver.find_element(*Locators.button_login_in_registration_form).click()
         driver.find_element(*Locators.input_email_auth).send_keys(UsersTestData.email)
         driver.find_element(*Locators.input_password_auth).send_keys(UsersTestData.password)
         driver.find_element(*Locators.button_login).click()
-        # Переносим ожидание и поиск внутрь ассерта
+        
         assert WebDriverWait(driver, 6).until(
             expected_conditions.visibility_of_element_located(Locators.button_make_the_order)
-        ) and driver.find_element(*Locators.button_make_the_order).is_displayed()
-
+        ).is_displayed()
+        
     # Вход через кнопку «Личный кабинет»
     def test_authentication_by_button_personal_account_in_main_page_success(self, driver):
         driver.find_element(*Locators.button_personal_account).click()
